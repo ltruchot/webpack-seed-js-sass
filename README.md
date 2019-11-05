@@ -2,7 +2,7 @@
 
 ## This is an empty project to begin pure JavaScript + Sass front-end coding out of the box
 
-NPM Last updated: Nov. 2019
+NPM deps last versions full update: Nov. 2019
 
 Clean and classic webpack + eslint (airbnb rules) + babel + file loader scaffolding for real world ES6+ projects.
 
