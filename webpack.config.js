@@ -8,6 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries');
+const CopyPlugin = require('copy-webpack-plugin');
 
 // globals
 const devMode = process.env.NODE_ENV !== 'production';
@@ -26,6 +27,12 @@ module.exports = {
 
   plugins: [
     new CleanWebpackPlugin(),
+    new CopyPlugin([
+      {
+        from: './public/assets',
+        to: './assets',
+      },
+    ]),
     new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
@@ -84,10 +91,8 @@ module.exports = {
         test: /.(js|jsx)$/,
         include: [path.resolve(__dirname, 'src')],
         loader: 'babel-loader',
-
         options: {
           plugins: ['syntax-dynamic-import'],
-
           presets: [
             [
               '@babel/preset-env',
@@ -100,7 +105,6 @@ module.exports = {
       },
     ],
   },
-
   optimization: {
     splitChunks: {
       cacheGroups: {
@@ -109,14 +113,12 @@ module.exports = {
           test: /[\\/]node_modules[\\/]/,
         },
       },
-
       chunks: 'async',
       minChunks: 1,
       minSize: 30000,
       name: true,
     },
   },
-
   devServer: {
     open: true,
     disableHostCheck: true,

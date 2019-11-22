@@ -19,6 +19,7 @@
     "babel-loader": "8.0.6",
     "babel-plugin-syntax-dynamic-import": "6.18.0",
     "clean-webpack-plugin": "3.0.0",
+    "copy-webpack-plugin": "5.0.5",
     "css-loader": "3.2.0",
     "eslint": "6.6.0",
     "eslint-config-airbnb-base": "14.0.0",
@@ -33,5 +34,6 @@
     "webpack-cli": "3.3.10",
     "webpack-dev-server": "3.9.0",
     "webpack-fix-style-only-entries": "0.4.0"
-  }
+  },
+  "dependencies": {}
 }
