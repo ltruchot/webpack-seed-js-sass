@@ -1,6 +1,6 @@
 {
   "name": "webpack-seed-js-sass",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "An empty project to begin pure JavaScript front-end coding out of the box.",
   "engines": {
     "node": "^12.0.0",
@@ -8,23 +8,23 @@
   },
   "main": "./src/index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack -p",
     "start": "webpack-dev-server"
   },
   "author": "Loïc TRUCHOT",
   "license": "CC-BY-NC-4.0",
   "devDependencies": {
-    "@babel/core": "7.6.4",
-    "@babel/preset-env": "7.6.3",
+    "@babel/core": "7.7.2",
+    "@babel/preset-env": "7.7.1",
     "babel-loader": "8.0.6",
     "babel-plugin-syntax-dynamic-import": "6.18.0",
     "clean-webpack-plugin": "3.0.0",
-    "copy-webpack-plugin": "5.0.5",
+    "copy-webpack-plugin": "^5.0.5",
     "css-loader": "3.2.0",
     "eslint": "6.6.0",
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-plugin-import": "2.18.2",
-    "file-loader": "4.2.0",
+    "file-loader": "4.3.0",
     "html-webpack-plugin": "3.2.0",
     "mini-css-extract-plugin": "0.8.0",
     "node-sass": "4.13.0",
