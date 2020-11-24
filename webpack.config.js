@@ -1,13 +1,9 @@
 // node
 const path = require('path');
-const fs = require('fs');
 
 // npm
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries');
 const CopyPlugin = require('copy-webpack-plugin');
 
 // globals
@@ -15,10 +11,7 @@ const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   mode: 'development',
-  entry: {
-    main: './src/index.js',
-    styles: ['./public/styles.scss'],
-  },
+  entry: './script.js',
   devtool: 'source-map',
   output: {
     filename: '[name].js',
@@ -26,26 +19,19 @@ module.exports = {
   },
 
   plugins: [
-    new CleanWebpackPlugin(),
-    new CopyPlugin([
-      {
-        from: './public/assets',
+    new CopyPlugin({
+      patterns: [{
+        from: './static/assets',
         to: './assets',
-      },
-    ]),
-    new webpack.ProgressPlugin(),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: './public/index.html',
-      favicon: './public/favicon.ico',
+      }, {
+        from: './static/php',
+        to: './',
+      }, {
+        from: './static/html',
+        to: './',
+      }],
     }),
-    ...fs.readdirSync('./public/pages').map(
-      (file) => new HtmlWebpackPlugin({
-        filename: file,
-        template: `./public/pages/${file}`,
-      }),
-    ),
-    new FixStyleOnlyEntriesPlugin(),
+    new webpack.ProgressPlugin(),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
@@ -62,9 +48,9 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              hmr: process.env.NODE_ENV === 'development',
-              reloadAll: true,
+              publicPath: '',
             },
+
           },
           'css-loader',
           'sass-loader',
@@ -92,7 +78,6 @@ module.exports = {
         include: [path.resolve(__dirname, 'src')],
         loader: 'babel-loader',
         options: {
-          plugins: ['syntax-dynamic-import'],
           presets: [
             [
               '@babel/preset-env',
@@ -104,20 +89,6 @@ module.exports = {
         },
       },
     ],
-  },
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        vendors: {
-          priority: -10,
-          test: /[\\/]node_modules[\\/]/,
-        },
-      },
-      chunks: 'async',
-      minChunks: 1,
-      minSize: 30000,
-      name: true,
-    },
   },
   devServer: {
     open: true,
