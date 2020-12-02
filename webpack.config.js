@@ -11,7 +11,7 @@ const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   mode: 'development',
-  entry: './script.js',
+  entry: './main.js',
   devtool: 'source-map',
   output: {
     filename: '[name].js',
